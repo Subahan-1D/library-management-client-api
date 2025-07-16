@@ -1,4 +1,4 @@
-# 🚀 My Shadcn UI Project
+# 🚀 My Project Library Management App
 
 A modern web application built with **Next.js**, **React**, **TypeScript**, **Tailwind CSS**, and **[shadcn/ui](https://ui.shadcn.com/)** for beautiful, reusable, and accessible components.
 
@@ -31,7 +31,7 @@ A modern web application built with **Next.js**, **React**, **TypeScript**, **Ta
 ### 1️⃣ Clone the repository
 
 ```bash
-git git remote add origin https://github.com/Subahan-1D/library-management-client-api.git
+git remote add origin https://github.com/Subahan-1D/library-management-client-api.git
 cd library-management-client-api
 
 pnpm install
@@ -47,3 +47,4 @@ npm run dev
 npx shadcn-ui@latest init
 
 
+```
