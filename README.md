@@ -11,6 +11,8 @@ It demonstrates proper **CRUD operations**, **state management**, **API integrat
 
 ---
 
+![Project Banner](./localhost-5173-library%20app.png)
+
 ## ✨ **Features**
 
 ### ✅ Public Routes
