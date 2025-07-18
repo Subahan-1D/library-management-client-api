@@ -1,4 +1,5 @@
 import Main from "@/Layout/Main";
+import AddBook from "@/Pages/AddBook";
 import ErrorPage from "@/Pages/ErrorPage";
 
 import Home from "@/Pages/Home";
@@ -16,6 +17,10 @@ export const routers = createBrowserRouter([
                 path: "/",
                 element: <Home></Home>
             },
+            {
+                path: "/addBooks",
+                element: <AddBook></AddBook>
+            }
         ]
     }
 
