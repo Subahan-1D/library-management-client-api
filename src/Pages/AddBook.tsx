@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import Swal from "sweetalert2";
-// import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 import Banner from "./Banner";
+import { useAddBookMutation } from "@/redux/features/api/libraryApi";
+import { useNavigate } from "react-router";
 
 const bookSchema = z.object({
     title: z.string().min(1, "Title is required"),
@@ -18,10 +19,13 @@ const bookSchema = z.object({
 type BookFormData = z.infer<typeof bookSchema>;
 
 const AddBook = () => {
+    const [addBook, { isLoading }] = useAddBookMutation()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
 
     } = useForm<BookFormData>({
         resolver: zodResolver(bookSchema),
@@ -30,7 +34,27 @@ const AddBook = () => {
         }
     });
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = async (data: BookFormData) => {
+        console.log(data)
+        try {
+            const formattedData = {
+                ...data,
+                genre: data.genre.toUpperCase()
+
+            }
+
+            await addBook(formattedData).unwrap();
+            Swal.fire("Success", "Book added successfully", "success").then(() => {
+                navigate('/books');
+            });
+            reset();
+
+        } catch (error) {
+            console.log("book Error", error)
+            Swal.fire("Error", "Failed to add book", "error");
+        }
+
+    }
 
 
     return (
@@ -38,8 +62,8 @@ const AddBook = () => {
             <div>
                 <Banner title="Add a Book"></Banner>
             </div>
-            <div className="text-black max-w-6xl w-5xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-md border border-green-500">
-                <h2 className="text-2xl font-bold mb-6 text-center">Add a New <span className="text-emerald-600">Book</span></h2>
+            <div className="text-black max-w-6xl w-5xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-md border ">
+                <h2 className="text-2xl font-bold mb-6 text-center">Add a New <span className="text-blue-600">Book</span></h2>
                 <p className="text-gray-600 mb-6 text-center">Please fill out the form below to add a new book to the library.</p>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     <div>
@@ -110,11 +134,22 @@ const AddBook = () => {
 
 
 
+
                     <button
                         type="submit"
-                        className="btn border-none w-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:bg-emerald-700 text-white py-2 px-4 rounded-md transition"
+                        disabled={isLoading}
+                        className="btn border-none w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition"
                     >
-                        Add Book
+                        {isLoading ? <p>
+                            <span className="loading loading-spinner text-primary"></span>
+                            <span className="loading loading-spinner text-secondary"></span>
+                            <span className="loading loading-spinner text-accent"></span>
+                            <span className="loading loading-spinner text-neutral"></span>
+                            <span className="loading loading-spinner text-info"></span>
+                            <span className="loading loading-spinner text-success"></span>
+                            <span className="loading loading-spinner text-warning"></span>
+                            <span className="loading loading-spinner text-error"></span>
+                        </p> : "Add Book"}
                     </button>
                 </form>
             </div>
