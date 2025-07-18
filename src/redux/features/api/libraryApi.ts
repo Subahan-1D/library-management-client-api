@@ -1,4 +1,8 @@
-import type { IBook, IBorrow } from "@/redux/interfeces/interfaces";
+import type {
+  IBook,
+  IBorrow,
+  IBorrowSummary,
+} from "@/redux/interfeces/interfaces";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const libraryApiSlice = createApi({
@@ -10,11 +14,12 @@ export const libraryApiSlice = createApi({
   endpoints: (builder) => ({
     // create book api
     addBook: builder.mutation<IBook, Partial<IBook>>({
-      query: (body) => ({
+      query: (book) => ({
         url: "/books",
         method: "POST",
-        body,
+        body: book,
       }),
+      invalidatesTags: ["Books"],
     }),
     // GET all books
     getBooks: builder.query<
@@ -33,7 +38,31 @@ export const libraryApiSlice = createApi({
         `/books?page=${page}&limit=${limit}`,
       providesTags: ["Books"],
     }),
-     // BORROW book
+    // single books
+    getBookById: builder.query<IBook, string>({
+      query: (id) => `/books/${id}`,
+      transformResponse: (response: { data: IBook }) => response.data,
+      providesTags: ["Books"],
+    }),
+    // UPDATE a book
+    updateBook: builder.mutation<IBook, { id: string; data: Partial<IBook> }>({
+      query: ({ id, data }) => ({
+        url: `/books/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Books"],
+    }),
+
+    // DELETE a book
+    deleteBook: builder.mutation<{ success: boolean }, string>({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Books"],
+    }),
+    // BORROW book
     borrowBook: builder.mutation<
       IBorrow,
       { book: string; quantity: number; dueDate: string }
@@ -45,7 +74,32 @@ export const libraryApiSlice = createApi({
       }),
       invalidatesTags: ["Books", "Borrows"],
     }),
+    // BORROW summary
+    getBorrowSummary: builder.query<
+      {
+        data: IBorrowSummary[];
+        meta: {
+          total: number;
+          page: number;
+          limit: number;
+          totalPages: number;
+        };
+      },
+      { page?: number; limit?: number }
+    >({
+      query: ({ page = 1, limit = 5 } = {}) =>
+        `/borrow?page=${page}&limit=${limit}`,
+      providesTags: ["Borrows"],
+    }),
   }),
 });
 
-export const { useAddBookMutation, useGetBooksQuery, useBorrowBookMutation } = libraryApiSlice;
+export const {
+  useAddBookMutation,
+  useGetBooksQuery,
+  useGetBookByIdQuery,
+  useUpdateBookMutation,
+  useDeleteBookMutation,
+  useBorrowBookMutation,
+  useGetBorrowSummaryQuery,
+} = libraryApiSlice;

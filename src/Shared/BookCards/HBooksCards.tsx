@@ -52,7 +52,7 @@ const BookCard = ({ book }: Props) => {
     <div className="container mx-auto group relative bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 flex flex-col h-full">
       {/* Status Ribbon */}
       <div className={`absolute top-0 right-0 px-3 py-1 text-xs font-semibold rounded-bl-lg
-        ${book.available ? 'bg-blue-500 text-white' : 'bg-rose-500 text-white'}`}>
+        ${book.available ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'}`}>
         {book.available ? `${book.copies} available` : "Out of stock"}
       </div>
 
@@ -77,7 +77,7 @@ const BookCard = ({ book }: Props) => {
         <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300 mb-4">
           <div className="flex items-center">
             <Hash className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400 flex-shrink-0" />
-            <span className="px-2 py-1 bg-emerald-100 dark:bg-blue-900 rounded-md text-xs">
+            <span className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900 rounded-md text-xs">
               {book.genre}
             </span>
           </div>
@@ -92,7 +92,7 @@ const BookCard = ({ book }: Props) => {
           <div className="grid grid-cols-2 gap-2">
             <Link
               to={`/details/${book._id}`}
-              className="py-2 px-3 bg-gradient-to-r from-blue-500 to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white text-sm rounded-md transition-all duration-300 flex items-center justify-center"
+              className="py-2 px-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white text-sm rounded-md transition-all duration-300 flex items-center justify-center"
             >
               <ArrowRight className="h-4 w-4 mr-1" />
               View
@@ -100,7 +100,7 @@ const BookCard = ({ book }: Props) => {
 
             <Link
               to={`/edit/${book._id}`}
-              className="py-2 px-3 border border-blue-500 text-blue-500 hover:bg-emerald-50 dark:hover:bg-gray-700 text-sm rounded-md transition-all duration-300 flex items-center justify-center"
+              className="py-2 px-3 border border-emerald-500 text-emerald-500 hover:bg-emerald-50 dark:hover:bg-gray-700 text-sm rounded-md transition-all duration-300 flex items-center justify-center"
             >
               <Edit className="h-4 w-4 mr-1" />
               Edit
@@ -113,7 +113,7 @@ const BookCard = ({ book }: Props) => {
               disabled={!book.available}
               className={`py-2 px-3 text-sm rounded-md transition-all duration-300 flex items-center justify-center
                 ${book.available
-                  ? 'bg-emerald-500 hover:emerald-600 text-white'
+                  ? 'bg-blue-500 hover:bg-blue-600 text-white'
                   : 'bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed'}`}
             >
               Borrow

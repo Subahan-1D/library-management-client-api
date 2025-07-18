@@ -54,7 +54,7 @@ const AllBooks = () => {
           <button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
-            className=" px-4 py-2 bg-emerald-500 text-white rounded disabled:opacity-50"
+            className=" px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           >
             Prev
           </button>
@@ -65,7 +65,7 @@ const AllBooks = () => {
               <button
                 key={pageNum}
                 onClick={() => handlePageClick(pageNum)}
-                className={`px-3 py-1 rounded ${pageNum === page ? "bg-emerald-500 text-white" : "bg-gray-500"
+                className={`px-3 py-1 rounded ${pageNum === page ? "bg-blue-500 text-white" : "bg-gray-500"
                   }`}
               >
                 {pageNum}
@@ -76,7 +76,7 @@ const AllBooks = () => {
           <button
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-emerald-500 text-white rounded disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           >
             Next
           </button>
