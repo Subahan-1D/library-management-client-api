@@ -1,10 +1,11 @@
+import Banner from "./Banner";
 
 
 
 const Home = () => {
     return (
-        <div className="w-full mx-auto w-full">
-           <h1>Hello</h1>
+        <div className="w-full mx-auto ">
+            <Banner title="Welcome to Book Library"></Banner>
         </div>
     );
 };
