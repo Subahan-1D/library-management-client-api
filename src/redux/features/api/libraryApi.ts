@@ -8,7 +8,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const libraryApiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api",
+    baseUrl: "https://library-management-api-tawny.vercel.app/api",
   }),
   tagTypes: ["Books", "Borrows"],
   endpoints: (builder) => ({
