@@ -1,5 +1,6 @@
 import Main from "@/Layout/Main";
 import AddBook from "@/Pages/AddBook";
+import AllBooks from "@/Pages/AllBooks";
 import ErrorPage from "@/Pages/ErrorPage";
 
 import Home from "@/Pages/Home";
@@ -20,6 +21,10 @@ export const routers = createBrowserRouter([
             {
                 path: "/addBooks",
                 element: <AddBook></AddBook>
+            },
+            {
+                path: "/books",
+                element: <AllBooks></AllBooks>
             }
         ]
     }
