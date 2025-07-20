@@ -5,12 +5,14 @@ import Banner from "./Banner";
 
 const BorrowSummary = () => {
     const [page, setPage] = useState(1);
+    console.log(page)
     const limit = 5;
 
     const { data, isLoading, isError } = useGetBorrowSummaryQuery({ page, limit });
 
     const books = data?.data || [];
     const totalPages = data?.meta?.totalPages || 1;
+    
 
     if (isLoading) return <div className="text-center py-10"> <span className="loading loading-spinner text-primary"></span>
         <span className="loading loading-spinner text-secondary"></span>
