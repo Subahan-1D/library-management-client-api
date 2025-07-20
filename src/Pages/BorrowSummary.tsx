@@ -12,7 +12,14 @@ const BorrowSummary = () => {
     const books = data?.data || [];
     const totalPages = data?.meta?.totalPages || 1;
 
-    if (isLoading) return <div className="text-center py-10">Loading books...</div>;
+    if (isLoading) return <div className="text-center py-10"> <span className="loading loading-spinner text-primary"></span>
+        <span className="loading loading-spinner text-secondary"></span>
+        <span className="loading loading-spinner text-accent"></span>
+        <span className="loading loading-spinner text-neutral"></span>
+        <span className="loading loading-spinner text-info"></span>
+        <span className="loading loading-spinner text-success"></span>
+        <span className="loading loading-spinner text-warning"></span>
+        <span className="loading loading-spinner text-error"></span></div>;
     if (isError) return <div className="text-center py-10 text-red-500">Failed to load books.</div>;
 
     return (
